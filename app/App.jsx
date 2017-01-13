@@ -33,28 +33,28 @@ class App extends React.Component {
 
   handleKeyDown(e) {
     let noteMap = {
-      KeyQ:   "A2",
-      Digit2: "A#2",
-      KeyW:   "B2",
-      Digit3: "B#2",
-      KeyE:   "C3",
-      Digit4: "C#3",
-      KeyR:   "D3",
-      Digit5: "D#3",
-      KeyT:   "E3",
-      Digit6: "E#3",
-      KeyY:   "F3",
-      Digit7: "F#3",
-      KeyU:   "G3",
-      Digit8: "G#3",
-      KeyI:   "A3",
-      Digit9: "A#3",
-      KeyO:   "B3",
-      Digit0: "B#3",
-      KeyP:   "C4",
+      KeyQ:   "A3",
+      Digit2: "A#3",
+      KeyW:   "B3",
+      Digit3: "B#3",
+      KeyE:   "C4",
+      Digit4: "C#4",
+      KeyR:   "D4",
+      Digit5: "D#4",
+      KeyT:   "E4",
+      Digit6: "E#4",
+      KeyY:   "F4",
+      Digit7: "F#4",
+      KeyU:   "G4",
+      Digit8: "G#4",
+      KeyI:   "A4",
+      Digit9: "A#4",
+      KeyO:   "B4",
+      Digit0: "B#4",
+      KeyP:   "C5",
     }
 
-    this.synth.triggerAttackRelease(Tone.Frequency(noteMap[e.code]).harmonize([0, 3, 7]).toFrequency(), "4n");
+    this.synth.triggerAttackRelease(noteMap[e.code], "8n");
   }
 
   handleGainUpdate(value) {
@@ -73,7 +73,7 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          <div>Press any key on the top row to play a harmonized note</div>
+          <div>Press any key on the top row to play a note</div>
         </div>
         <div>
           <Knob
@@ -101,7 +101,7 @@ class App extends React.Component {
             fontSize={ 10 }
             color="#aa0000"
             title="Room Size"
-            initialValue={ 90 }
+            initialValue={ 45 }
             maxValue={ 100 }
           />
         </div>
