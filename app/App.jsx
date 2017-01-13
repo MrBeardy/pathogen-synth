@@ -25,6 +25,9 @@ class App extends React.Component {
     this.reverb = new Tone.JCReverb(0.2).connect(Tone.Master);
 
     this.synth.connect(this.reverb);
+    this.state = {
+      roomSizeAlpha: .45
+    }
   }
 
   componentDidMount() {
@@ -54,7 +57,9 @@ class App extends React.Component {
       KeyP:   "C5",
     }
 
-    this.synth.triggerAttackRelease(noteMap[e.code], "8n");
+    if (noteMap.hasOwnProperty(e.code)) {
+      this.synth.triggerAttackRelease(noteMap[e.code], "8n");
+    }
   }
 
   handleGainUpdate(value) {
@@ -67,6 +72,9 @@ class App extends React.Component {
 
   handleReverbRoomSizeUpdate(value) {
     this.reverb.set("roomSize", value / 100);
+    this.setState({
+      roomSizeAlpha: value / 100
+    })
   }
 
   render() {
@@ -89,7 +97,6 @@ class App extends React.Component {
           <Knob
             onUpdate={ this.handleDetuneUpdate }
             fontSize={ 10 }
-            color="#aa0000"
             title="Detune"
             valueSuffix=" cts."
             initialValue={ 550 }
@@ -99,7 +106,7 @@ class App extends React.Component {
           <Knob
             onUpdate={ this.handleReverbRoomSizeUpdate }
             fontSize={ 10 }
-            color="#aa0000"
+            color={`hsla(200, 99%, 34%, ${this.state.roomSizeAlpha})`}
             title="Room Size"
             initialValue={ 45 }
             maxValue={ 100 }
